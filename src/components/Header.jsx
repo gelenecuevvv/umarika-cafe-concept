@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { useDialog } from '../hooks/useDialog.js'
+import Logo from './Logo.jsx'
 
 const links = [
   { to: '/', label: 'Home', end: true },
   { to: '/menu', label: 'Menu' },
+  { to: '/#reviews', label: 'Reviews', section: true },
   { to: '/visit', label: 'Visit & Contact' },
 ]
 
@@ -36,17 +38,22 @@ export default function Header() {
   return (
     <header className="site-header">
       <div className="container header-inner">
-        <Link to="/" className="wordmark" aria-label="Umarika Café, home">
-          <span className="wordmark-name">Umarika</span>
-          <span className="wordmark-cafe">Café</span>
+        <Link to="/" className="brand-link" aria-label="Umarika Café home">
+          <Logo />
         </Link>
 
         <nav className="desktop-nav" aria-label="Primary">
-          {links.map((link) => (
-            <NavLink key={link.to} to={link.to} end={link.end} className="nav-link">
-              {link.label}
-            </NavLink>
-          ))}
+          {links.map((link) =>
+            link.section ? (
+              <Link key={link.to} to={link.to} className="nav-link">
+                {link.label}
+              </Link>
+            ) : (
+              <NavLink key={link.to} to={link.to} end={link.end} className="nav-link">
+                {link.label}
+              </NavLink>
+            ),
+          )}
           <Link to="/menu" className="btn btn-primary">
             View Menu
           </Link>
@@ -75,18 +82,26 @@ export default function Header() {
           ref={dialogRef}
         >
           <div className="mobile-menu-top">
-            <p className="wordmark-name">Umarika</p>
+            <Link to="/" className="brand-link" aria-label="Umarika Café home" onClick={closeMenu}>
+              <Logo />
+            </Link>
             <button type="button" className="btn btn-secondary" onClick={closeMenu}>
               <X aria-hidden="true" size={18} />
               Close
             </button>
           </div>
           <nav className="mobile-nav-list" aria-label="Mobile">
-            {links.map((link) => (
-              <NavLink key={link.to} to={link.to} end={link.end} className="nav-link" onClick={closeMenu}>
-                {link.label}
-              </NavLink>
-            ))}
+            {links.map((link) =>
+              link.section ? (
+                <Link key={link.to} to={link.to} className="nav-link" onClick={closeMenu}>
+                  {link.label}
+                </Link>
+              ) : (
+                <NavLink key={link.to} to={link.to} end={link.end} className="nav-link" onClick={closeMenu}>
+                  {link.label}
+                </NavLink>
+              ),
+            )}
             <Link to="/menu" className="btn btn-primary" onClick={closeMenu}>
               View Menu
             </Link>

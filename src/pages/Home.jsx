@@ -1,64 +1,46 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Star } from 'lucide-react'
 import { business } from '../data/business.js'
-import { menuArtwork } from '../data/images.js'
-import { exploreGroups, getMenuItem, highlightIds, itemPriceLabel, itemsInCategory } from '../data/menu.js'
+import { venuePhoto } from '../data/images.js'
+import { exploreGroups } from '../data/menu.js'
+import { reviews } from '../data/reviews.js'
 import { usePageTitle } from '../hooks/usePageTitle.js'
-import Address from '../components/Address.jsx'
-import CornerPattern from '../components/CornerPattern.jsx'
 import ExternalLink from '../components/ExternalLink.jsx'
-import MenuViewer from '../components/MenuViewer.jsx'
+import LocationSection from '../components/LocationSection.jsx'
 
 export default function Home() {
-  const [artwork, setArtwork] = useState(null)
-  const highlights = highlightIds.map((id) => getMenuItem(id)).filter(Boolean)
-  const espresso = itemsInCategory('espresso')
-  const matcha = itemsInCategory('matcha')
-
-  usePageTitle('Umarika Café — Coffee, comfort, and something delicious')
+  usePageTitle('Umarika Café — Good food. Great coffee.')
 
   return (
     <>
-      <section className="hero section">
-        <div className="pattern-slot bottom-left">
-          <CornerPattern />
+      <section className="photo-hero" aria-labelledby="page-title">
+        <div className="photo-hero-media">
+          <img
+            src={venuePhoto.src}
+            width={venuePhoto.width}
+            height={venuePhoto.height}
+            alt={venuePhoto.heroAlt}
+            fetchPriority="high"
+          />
         </div>
-        <div className="container hero-layout">
-          <div className="hero-copy">
+        <div className="photo-hero-scrim">
+          <div className="container hero-copy">
             <p className="eyebrow">{business.eyebrow}</p>
             <h1 id="page-title" tabIndex={-1} className="hero-title">
-              <span className="title-line">Coffee, comfort,</span>
-              <span className="title-line">and something delicious.</span>
+              <span className="title-line">Good food.</span>
+              <span className="title-line">Great coffee.</span>
+              <span className="title-line">Welcome to Umarika.</span>
             </h1>
             <span className="gold-rule" aria-hidden="true" />
-            <p className="lede">
-              Explore coffee, matcha, breakfast plates, ramen, and Japanese–Filipino favorites at Umarika Café.
-            </p>
+            <p className="lede">Coffee, matcha, ramen, and Japanese–Filipino favorites, all in one place.</p>
             <div className="hero-actions">
               <Link to="/menu" className="btn btn-primary">
-                Explore the Menu
+                Explore Our Menu.
               </Link>
-              <Link to="/visit" className="btn btn-secondary">
-                Plan Your Visit
+              <Link to="/#location" className="btn btn-secondary">
+                Find Us.
               </Link>
             </div>
-          </div>
-
-          <div className="hero-panel on-dark" data-reveal data-reveal-delay="160">
-            <div className="pattern-slot top-right">
-              <CornerPattern />
-            </div>
-            <button type="button" className="hero-frame" onClick={() => setArtwork(menuArtwork.drinks)}>
-              <img
-                src={menuArtwork.drinks.src}
-                alt=""
-                width={menuArtwork.drinks.width}
-                height={menuArtwork.drinks.height}
-              />
-              <span className="hero-frame-caption">View original menu</span>
-            </button>
-            <p className="hero-panel-note">Breakfast, snacks, and drinks artwork supplied for this concept.</p>
           </div>
         </div>
       </section>
@@ -93,91 +75,47 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section taste" aria-labelledby="taste-title">
-        <div className="container taste-layout">
+      <section id="reviews" className="section reviews" aria-labelledby="reviews-title">
+        <div className="container">
           <div data-reveal>
-            <p className="eyebrow">From the supplied menu</p>
-            <h2 id="taste-title" className="section-title">
-              A Taste of Umarika
+            <p className="eyebrow">{reviews.label}</p>
+            <h2 id="reviews-title" className="section-title">
+              {reviews.heading}
             </h2>
-            <span className="gold-rule" aria-hidden="true" />
-            <p className="lede">Four dishes and sets printed on the current menu artwork.</p>
+            <p className="review-score">
+              <Star aria-hidden="true" size={22} fill="currentColor" />
+              <span>{reviews.ratingLabel}</span>
+            </p>
+            <p className="review-curated">{reviews.curatedLabel}</p>
           </div>
-          <ul className="taste-list">
-            {highlights.map((item) => (
-              <li key={item.id} data-reveal>
-                <Link className="taste-row" to={`/menu?q=${encodeURIComponent(item.name)}`}>
-                  <span className="taste-name">{item.name}</span>
-                  <span className="price">{itemPriceLabel(item)}</span>
-                </Link>
+          <ul className="review-grid">
+            {reviews.items.map((review) => (
+              <li key={review.author} className="review-card" data-reveal>
+                <p className="review-stars" aria-label="5 stars">
+                  {Array.from({ length: 5 }, (_, starIndex) => (
+                    <Star key={starIndex} aria-hidden="true" size={16} fill="currentColor" />
+                  ))}
+                </p>
+                <blockquote>
+                  <p>{review.text}</p>
+                </blockquote>
+                <p className="review-author">{review.author}</p>
               </li>
             ))}
           </ul>
+          <ExternalLink href={reviews.mapsUrl} className="btn btn-secondary review-more">
+            Read more on Google Maps ↗
+          </ExternalLink>
         </div>
       </section>
 
-      <section className="band on-dark" aria-labelledby="drinks-title">
-        <div className="pattern-slot top-right">
-          <CornerPattern />
-        </div>
-        <div className="container band-layout">
-          <div data-reveal>
-            <p className="eyebrow">Espresso and matcha</p>
-            <h2 id="drinks-title" className="section-title">
-              Coffee days. Matcha moments.
-            </h2>
-            <span className="gold-rule" aria-hidden="true" />
-            <p className="lede">
-              Espresso-based coffee and the matcha series, from the Umarika drinks menu. Fruit teas, frappes, milk
-              teas, and other beverages are on the same list.
-            </p>
-            <Link to="/menu?group=drinks" className="btn btn-on-dark">
-              Browse Drinks
-            </Link>
-          </div>
-          <div className="band-lists" data-reveal>
-            <div>
-              <h3>Espresso-based</h3>
-              <ul>
-                {espresso.map((item) => (
-                  <li key={item.id}>{item.name}</li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3>Matcha series</h3>
-              <ul>
-                {matcha.map((item) => (
-                  <li key={item.id}>{item.name}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
+      <section id="location" className="section location-section" aria-labelledby="location-title">
+        <LocationSection
+          headingId="location-title"
+          heading="Come by Umarika."
+          intro="Write, visit the Facebook page, or open the map to reach Umarika Café."
+        />
       </section>
-
-      <section className="section visit-preview" aria-labelledby="visit-preview-title">
-        <div className="container visit-preview-layout">
-          <div data-reveal>
-            <p className="eyebrow">{business.placeLabel}</p>
-            <h2 id="visit-preview-title" className="section-title">
-              Visit & Contact
-            </h2>
-            <span className="gold-rule" aria-hidden="true" />
-            <Address className="address-lines preview-address" />
-          </div>
-          <div className="hero-actions" data-reveal>
-            <Link to="/visit" className="btn btn-primary">
-              Visit & Contact
-            </Link>
-            <ExternalLink href={business.facebookUrl} className="btn btn-secondary">
-              Find us on Facebook
-            </ExternalLink>
-          </div>
-        </div>
-      </section>
-
-      <MenuViewer image={artwork} onClose={() => setArtwork(null)} />
     </>
   )
 }

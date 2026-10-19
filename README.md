@@ -29,7 +29,8 @@ Routes use the browser history API. Vite’s dev and preview servers handle that
 
 ## Where to edit
 
-- Business name, address, email, Facebook, and the map search: `src/data/business.js`
+- Business name, address, email, hours, Facebook, and map links: `src/data/business.js`
+- Google review snapshot: `src/data/reviews.js`
 - Menu names, notes, and prices: `src/data/menu.js`
 - Menu artwork paths: `src/data/images.js` and `public/menus/`
 
@@ -41,10 +42,10 @@ Confirm each item with Umarika Café before treating this as a live site.
 
 - [ ] Current menu and prices
 - [ ] Preferred phone number
-- [ ] Operating hours
-- [ ] Original logo
-- [ ] High-resolution food and venue photos
-- [ ] Exact map pin
+- [x] Store hours, 10:00 AM–10:00 PM. Opening days are still unconfirmed, so the site does not say “Daily.”
+- [x] Logo file, used as supplied
+- [ ] High-resolution food photos. One exterior photo is in use.
+- [ ] Google Maps embed HTML. The short Maps link is live; the iframe src is not.
 - [ ] Existing domain and hosting arrangements
 
 ### Phone numbers
@@ -56,15 +57,19 @@ Two numbers were supplied and they do not match. Neither is shown on the site, a
 
 ### Operating hours
 
-Hours are not shown. An “Open now” label in a Facebook screenshot is not an operating schedule. Ask for the days and hours the café wants published.
+The site shows store hours as 10:00 AM–10:00 PM. It does not name days, and it does not say “Daily,” because those were not confirmed.
 
 ### Logo
 
-No separate high-resolution logo file was included. The header uses a temporary text wordmark, “Umarika”. Please request the original logo. The cup mark printed on the menu was not redrawn or replaced with a new logo.
+The supplied logo image is used in the header and footer at its original proportions, lettering, and colors. It was not redrawn.
+
+### Reviews
+
+The homepage shows a manually written overall rating, “4.4 stars on Google,” and three selected review excerpts. It does not show a review count or a screenshot. These are not a live feed. Automatic review updates would be an optional later integration, not part of this static site.
 
 ### Photos still needed
 
-The supplied files are menu composites at 1024×622 pixels. Dish photos inside them are too small to use as site photography, so they were not cropped into heroes or category panels. The menus appear only as framed artwork and in the original-menu viewer.
+The hero and café feature use the supplied exterior photo, `Umarika.jpg` (2048×1536). The hero shows the full facade on small screens and a wide crop on desktop. The feature panel uses a second crop toward the lit terrace. Dish photos were not extracted from the menu composites.
 
 For a final version, ask for:
 
@@ -84,11 +89,9 @@ Do not replace this list with stock food photos presented as Umarika’s dishes.
 
 ### Map
 
-“Search Location on Google Maps” searches for:
+The external map button uses `https://maps.app.goo.gl/yEfu782oV3RBfPaR7`.
 
-`Umarika Café, Purok 16, Damilag, Manolo Fortich, Bukidnon, Philippines`
-
-That is a map search, not a verified pin. Ask the owner for the exact pin before embedding a map.
+The page does not embed a map yet. Paste the iframe `src` from Google Maps → Share → Embed a map into `mapEmbedUrl` in `src/data/business.js`. Do not put the short link in that field. Until then, the location column shows an address panel and an “Open Google Maps” link.
 
 ### Domain and hosting
 
@@ -112,4 +115,4 @@ Menu text and prices were transcribed from the two supplied menu images. Where t
 12. **Affogato.** It is under Sweet & Savory Bites. Classic, Caramel, and Mocha are choices at one price, ₱120.
 13. **Katsudon (Pork/Chicken).** Pork and chicken are printed as one item at ₱220.
 
-Public pages do not include ordering, a cart, checkout, a contact form, a telephone button, operating hours, or an “Open now” status.
+Public pages do not include ordering, a cart, checkout, a contact form, a telephone button, or an “Open now” status. Store hours are shown without days.
