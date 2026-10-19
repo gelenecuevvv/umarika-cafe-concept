@@ -45,7 +45,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="hero-panel on-dark">
+          <div className="hero-panel on-dark" data-reveal data-reveal-delay="160">
             <div className="pattern-slot top-right">
               <CornerPattern />
             </div>
@@ -65,16 +65,19 @@ export default function Home() {
 
       <section className="section explore" aria-labelledby="explore-title">
         <div className="container">
-          <p className="eyebrow">The menu</p>
-          <h2 id="explore-title" className="section-title">
-            Explore the menu
-          </h2>
+          <div data-reveal>
+            <p className="eyebrow">The menu</p>
+            <h2 id="explore-title" className="section-title">
+              Explore the menu
+            </h2>
+          </div>
           <div className="explore-grid">
             {exploreGroups.map((entry) => (
               <Link
                 key={entry.group}
                 to={`/menu?group=${entry.group}`}
                 className={`explore-card explore-card--${entry.tone}`}
+                data-reveal
               >
                 <span className="gold-rule" aria-hidden="true" />
                 <span className="explore-index">{entry.index}</span>
@@ -92,7 +95,7 @@ export default function Home() {
 
       <section className="section taste" aria-labelledby="taste-title">
         <div className="container taste-layout">
-          <div>
+          <div data-reveal>
             <p className="eyebrow">From the supplied menu</p>
             <h2 id="taste-title" className="section-title">
               A Taste of Umarika
@@ -102,7 +105,7 @@ export default function Home() {
           </div>
           <ul className="taste-list">
             {highlights.map((item) => (
-              <li key={item.id}>
+              <li key={item.id} data-reveal>
                 <Link className="taste-row" to={`/menu?q=${encodeURIComponent(item.name)}`}>
                   <span className="taste-name">{item.name}</span>
                   <span className="price">{itemPriceLabel(item)}</span>
@@ -118,7 +121,7 @@ export default function Home() {
           <CornerPattern />
         </div>
         <div className="container band-layout">
-          <div>
+          <div data-reveal>
             <p className="eyebrow">Espresso and matcha</p>
             <h2 id="drinks-title" className="section-title">
               Coffee days. Matcha moments.
@@ -132,7 +135,7 @@ export default function Home() {
               Browse Drinks
             </Link>
           </div>
-          <div className="band-lists">
+          <div className="band-lists" data-reveal>
             <div>
               <h3>Espresso-based</h3>
               <ul>
@@ -155,7 +158,7 @@ export default function Home() {
 
       <section className="section visit-preview" aria-labelledby="visit-preview-title">
         <div className="container visit-preview-layout">
-          <div>
+          <div data-reveal>
             <p className="eyebrow">{business.placeLabel}</p>
             <h2 id="visit-preview-title" className="section-title">
               Visit & Contact
@@ -163,7 +166,7 @@ export default function Home() {
             <span className="gold-rule" aria-hidden="true" />
             <Address className="address-lines preview-address" />
           </div>
-          <div className="hero-actions">
+          <div className="hero-actions" data-reveal>
             <Link to="/visit" className="btn btn-primary">
               Visit & Contact
             </Link>

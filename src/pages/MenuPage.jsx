@@ -65,19 +65,21 @@ export default function MenuPage() {
   return (
     <section className="section menu-page">
       <div className="container">
-        <p className="eyebrow">Umarika Café</p>
-        <h1 id="page-title" tabIndex={-1} className="section-title page-title">
-          Our Menu
-        </h1>
-        <p className="lede menu-intro">
-          Coffee, matcha, breakfast, ramen, and Japanese–Filipino dishes transcribed from the supplied menus.
-        </p>
-        <p className="quiet-note">
-          Menu and prices are based on the supplied menu. Please confirm current availability and pricing with Umarika
-          Café.
-        </p>
+        <div data-reveal>
+          <p className="eyebrow">Umarika Café</p>
+          <h1 id="page-title" tabIndex={-1} className="section-title page-title">
+            Our Menu
+          </h1>
+          <p className="lede menu-intro">
+            Coffee, matcha, breakfast, ramen, and Japanese–Filipino dishes transcribed from the supplied menus.
+          </p>
+          <p className="quiet-note">
+            Menu and prices are based on the supplied menu. Please confirm current availability and pricing with Umarika
+            Café.
+          </p>
+        </div>
 
-        <div className="original-menu">
+        <div className="original-menu" data-reveal>
           <h2>View Original Menu</h2>
           <div className="original-menu-actions">
             {artworkList.map((image) => (
@@ -89,7 +91,7 @@ export default function MenuPage() {
           </div>
         </div>
 
-        <div className="menu-tools">
+        <div className="menu-tools" data-reveal>
           <div className="search-field">
             <label className="field-label" htmlFor="menu-search">
               Search the menu
@@ -114,7 +116,7 @@ export default function MenuPage() {
           )}
         </div>
 
-        <div className="filter-bar" role="group" aria-label="Menu categories">
+        <div className="filter-bar" role="group" aria-label="Menu categories" data-reveal>
           {categories.map((entry) => {
             const pressed = entry.id === 'all' ? !activeCategories : Boolean(activeCategories?.includes(entry.id))
             return (
@@ -138,7 +140,7 @@ export default function MenuPage() {
 
         <div id="menu-results">
           {sections.length === 0 ? (
-            <div className="empty-state" role="status">
+            <div className="empty-state" role="status" data-reveal>
               <p>No items match those filters.</p>
               <button type="button" className="btn btn-primary" onClick={clearFilters}>
                 Clear filters
@@ -146,7 +148,12 @@ export default function MenuPage() {
             </div>
           ) : (
             sections.map((section) => (
-              <section key={section.id} className="menu-category" aria-labelledby={`cat-${section.id}`}>
+              <section
+                key={section.id}
+                className="menu-category"
+                aria-labelledby={`cat-${section.id}`}
+                data-reveal
+              >
                 <h2 id={`cat-${section.id}`}>{section.label}</h2>
                 <ul className="menu-list">
                   {section.items.map((item) => (

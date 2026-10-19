@@ -11,7 +11,7 @@ export default function Visit() {
   return (
     <section className="section visit-page">
       <div className="container visit-layout">
-        <div className="visit-copy">
+        <div className="visit-copy" data-reveal>
           <p className="eyebrow">{business.placeLabel}</p>
           <h1 id="page-title" tabIndex={-1} className="section-title page-title">
             Come by Umarika.
@@ -49,7 +49,7 @@ export default function Visit() {
           </div>
         </div>
 
-        <aside className="location-panel" aria-labelledby="map-search-title">
+        <aside className="location-panel" aria-labelledby="map-search-title" data-reveal>
           <div className="pattern-slot bottom-left">
             <CornerPattern />
           </div>

@@ -5,7 +5,7 @@ import Address from './Address.jsx'
 export default function Footer() {
   return (
     <footer className="site-footer">
-      <div className="container footer-grid">
+      <div className="container footer-grid" data-reveal>
         <div>
           <p className="footer-wordmark">Umarika</p>
           <p className="footer-cafe">Café</p>
@@ -18,7 +18,9 @@ export default function Footer() {
         </nav>
       </div>
       <div className="container">
-        <p className="concept-credit">{business.conceptCredit}</p>
+        <p className="concept-credit" data-reveal>
+          {business.conceptCredit}
+        </p>
       </div>
     </footer>
   )

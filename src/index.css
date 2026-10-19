@@ -1288,23 +1288,33 @@ main:focus {
   }
 
   .hero-copy > * {
-    animation: rise 0.6s ease both;
+    animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   .hero-copy > *:nth-child(2) {
-    animation-delay: 0.05s;
+    animation-delay: 0.08s;
   }
 
   .hero-copy > *:nth-child(3) {
-    animation-delay: 0.1s;
+    animation-delay: 0.16s;
   }
 
   .hero-copy > *:nth-child(4) {
-    animation-delay: 0.15s;
+    animation-delay: 0.24s;
   }
 
   .hero-copy > *:nth-child(5) {
-    animation-delay: 0.2s;
+    animation-delay: 0.32s;
+  }
+
+  [data-reveal]:not(.is-in) {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  [data-reveal].is-in {
+    animation: rise 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--reveal-delay, 0ms);
   }
 }
 
@@ -1321,7 +1331,7 @@ main:focus {
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(22px);
   }
 
   to {

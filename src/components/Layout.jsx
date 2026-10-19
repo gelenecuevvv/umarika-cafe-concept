@@ -1,11 +1,13 @@
 import { useEffect, useRef } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
+import { useScrollReveal } from '../hooks/useScrollReveal.js'
 import Header from './Header.jsx'
 import Footer from './Footer.jsx'
 
 export default function Layout() {
   const { pathname } = useLocation()
   const isFirst = useRef(true)
+  useScrollReveal(pathname)
 
   useEffect(() => {
     if (isFirst.current) {

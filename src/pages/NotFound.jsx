@@ -6,7 +6,7 @@ export default function NotFound() {
 
   return (
     <section className="section">
-      <div className="container narrow">
+      <div className="container narrow" data-reveal>
         <p className="eyebrow">Umarika Café</p>
         <h1 id="page-title" tabIndex={-1} className="section-title page-title">
           This page is not part of the concept.
